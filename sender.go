@@ -7,13 +7,12 @@ import (
 	"github.com/status-im/status-go-sdk"
 )
 
-func startSender(ch *sdk.Channel, interval time.Duration) {
+func startSender(ch *sdk.Channel, interval time.Duration, statsPort string) {
 	var (
-		counter     int
-		ticker      = time.NewTicker(interval)
-		statsTicker = time.NewTicker(10 * time.Second)
-		pending     = make(map[int]time.Time)
-		recvCh      = make(chan Msg, 1000)
+		counter int
+		ticker  = time.NewTicker(interval)
+		pending = make(map[int]time.Time)
+		recvCh  = make(chan Msg, 1000)
 	)
 
 	if _, err := ch.Subscribe(func(m *sdk.Msg) {
@@ -30,7 +29,7 @@ func startSender(ch *sdk.Channel, interval time.Duration) {
 		log.Fatal(err)
 	}
 
-	stats := NewStats()
+	stats := NewStats(statsPort)
 
 	for {
 		select {
@@ -58,8 +57,6 @@ func startSender(ch *sdk.Channel, interval time.Duration) {
 			delete(pending, c)
 			dur := time.Since(start)
 			stats.AddRountrip(dur)
-		case <-statsTicker.C:
-			stats.Print()
 		}
 	}
 }
