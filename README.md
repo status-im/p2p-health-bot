@@ -10,6 +10,8 @@ It operates in two modes: sender and receiver. Sends sends health check messages
 go get github.com/status-im/p2p-health-bot
 ```
 
+You may also want to run `dep ensure` to use deps versions used at the moment of writing package.
+
 # Usage
 
 ### First node
