@@ -53,6 +53,11 @@ Currently exposed metrics:
  - `msgs_received`
  - `msgs_responses_latency`
 
+### Deployment
+
+This software is deployed via Docker image built with `Dockerfile` ran from the `Makefile`. The image is then pushed to:
+https://hub.docker.com/r/statusteam/p2p-health-bot/
+
 # License
 
 MIT
