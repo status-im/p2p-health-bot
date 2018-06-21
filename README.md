@@ -52,6 +52,8 @@ Currently exposed metrics:
  - `msgs_sent`
  - `msgs_received`
  - `msgs_responses_latency`
+ 
+ Latency is in milliseconds.
 
 ### Deployment
 
