@@ -45,7 +45,7 @@ See `p2p-health-bot --help` for more options.
 
 ### Metrics
 
-Metrics are exposed in Prometheus format on `/metrics` endpoint. Default listen port is 8008. Use `-statsPort` flag to change it.
+Metrics are exposed in Prometheus format on `/metrics` endpoint of **sender** node only. Default listen port is 8008. Use `-statsPort` flag to change it.
 
 Currently exposed metrics:
 
