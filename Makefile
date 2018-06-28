@@ -4,7 +4,6 @@ IMAGE_NAME = 'statusteam/p2p-health-bot'
 all: docker-image
 
 docker-image:
-	docker build \
+	docker build . \
 		-t $(IMAGE_NAME):$(COMMIT) \
-		-t $(IMAGE_NAME):latest \
-		.
+		-t $(IMAGE_NAME):latest
