@@ -19,11 +19,11 @@ var (
 		Name: "msgs_received",
 		Help: "Message responses received by bot",
 	})
-	msgsLatencies = prometheus.NewSummary(prometheus.SummaryOpts{
-		Name:       "msgs_responses_latency",
-		Help:       "Latencies of responses to bot messages",
-		Objectives: map[float64]float64{0.5: 0.05, 0.9: 0.01, 0.99: 0.001},
-	})
+	msgsLatencies = prometheus.NewHistogramVec(prometheus.HistogramOpts{
+		Name:    "msgs_responses_latency",
+		Help:    "Latencies of responses to bot messages",
+		Buckets: []float64{500, 1000, 2000, 5000, 20000, 30000},
+	}, []string{"bot"})
 )
 
 func init() {
@@ -61,5 +61,5 @@ func (s *Stats) AddSent() {
 // AddRoundtrip adds information about successful message roundtrip.
 func (s *Stats) AddRountrip(d time.Duration) {
 	msgsReceived.Inc()
-	msgsLatencies.Observe(float64(d / time.Millisecond))
+	msgsLatencies.WithLabelValues("default").Observe(float64(d / time.Millisecond))
 }
