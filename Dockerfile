@@ -15,6 +15,10 @@ RUN cd ${REPO} && go get && go build
 # Copy the binary to the second image
 FROM alpine:latest
 
+LABEL source="https://github.com/status-im/p2p-health-bot"
+LABEL description="This bot measures latency for Status messages (complete roundtrip)."
+LABEL maintainer="ivand@status.im"
+
 RUN apk add --no-cache ca-certificates bash
 
 ENV REPO=/go/src/github.com/status-im/p2p-health-bot
