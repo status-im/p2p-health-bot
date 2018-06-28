@@ -21,8 +21,8 @@ var (
 	})
 	msgsLatencies = prometheus.NewHistogramVec(prometheus.HistogramOpts{
 		Name:    "msgs_responses_latency",
-		Help:    "Latencies of responses to bot messages",
-		Buckets: []float64{500, 1000, 2000, 5000, 20000, 30000},
+		Help:    "Latencies of responses to bot messages in ms",
+		Buckets: []float64{100, 500, 1000, 2000, 3000, 4000, 5000, 7500, 10000, 20000, 30000},
 	}, []string{"bot"})
 )
 
